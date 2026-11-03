@@ -15,3 +15,31 @@ body{background:radial-gradient(ellipse at 50% -15%,#17351b 0,#050b08 50%);backg
 .cta{color:#14200a}
 .bottom{box-shadow:0 -8px 25px #0008}
 @media(max-width:390px){.hero{padding:18px 14px;min-height:260px}.hero-copy{max-width:72%}.hero h1{font-size:29px}.hero-art{right:-20px}.categories{gap:6px}.category{padding:9px;min-height:150px}.category b{font-size:12px}.category small{font-size:10px}}
+
+/* FIX HEADER PREMIUM IPHONE */
+.top {
+  height: 115px;
+  padding-top: 15px;
+  background:
+    linear-gradient(180deg, rgba(3,10,5,.25), #071008 100%),
+    url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1400&q=90")
+    center 45% / cover;
+  overflow: hidden;
+}
+
+.hero-tractor {
+  top: 5px;
+  right: 65px;
+  font-size: 85px;
+  opacity: .8;
+}
+
+.brand {
+  position: relative;
+  z-index: 3;
+}
+
+/* Safe area iPhone */
+body {
+  padding-top: env(safe-area-inset-top);
+}
