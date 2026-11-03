@@ -1,58 +1,13 @@
-const compactTractors = [
- {name:"Fendt 200 V Vario",brand:"Fendt",model:"207 V / 208 V / 209 V / 210 V / 211 V Vario",price:91000,power:"79–114 CP",speed:"40 km/h",weight:"3,1 t",fuel:"68 l",trans:"CVT",category:"Tractor mic, compact",year:"2020",img:"https://farmingsimulator.wiki.gg/wiki/Special:FilePath/Fendt_200_V_Vario_(FS25).png",desc:"Tractor compact premium, proiectat pentru lucrări agricole în spații înguste și ferme specializate. Transmisia Vario oferă control continuu al vitezei și confort la manevre.",pros:["Manevrabilitate bună","Transmisie modernă CVT","Putere potrivită utilajelor compacte","Dimensiuni potrivite fermelor mici"],cons:["Preț relativ ridicat","Nu este potrivit pentru utilaje foarte grele","Capacitate limitată pentru lucrări de mare amploare"],uses:["Lucrări în vie și plantații","Cultivare cu utilaje compacte","Transport remorci mici","Întreținerea fermei"]},
- {name:"Landini REX 4 GT",brand:"Landini",model:"REX 4 GT",price:39500,power:"70–112 CP",speed:"40 km/h",weight:"2,9 t",fuel:"—",trans:"Manuală",category:"Tractor mic",year:"—",img:"https://farmingsimulator.wiki.gg/wiki/Special:FilePath/Landini_REX_4_GT_(FS25).png",desc:"Tractor compact specializat pentru livezi și plantații, cu profil potrivit lucrului între rânduri și manevre în spații restrânse.",pros:["Profil compact","Potrivit pentru plantații","Manevrabilitate bună"],cons:["Putere limitată față de tractoarele mari","Mai puțin potrivit pentru lucrări grele"],uses:["Livezi","Vii","Transport și întreținere"]}
- ,{name:"New Holland TK4.80 Methane Power",brand:"New Holland",model:"TK4.80 Methane Power",price:57500,power:"75 CP",speed:"12 km/h",weight:"3,6 t",fuel:"Metan",trans:"Manuală",category:"Tractor mic pe șenile",year:"—",img:"https://farmingsimulator.wiki.gg/wiki/Special:FilePath/New_Holland_TK4.80_Methane_Power_(FS25).png",desc:"Tractor pe șenile pentru terenuri în pantă și lucrări specializate. Propulsia pe metan îl diferențiază de tractoarele compacte convenționale.",pros:["Tracțiune pe șenile","Potrivit terenurilor dificile","Motor pe metan"],cons:["Viteză redusă","Utilizare mai specializată"],uses:["Vii și plantații","Terenuri în pantă","Lucrări de întreținere"]}
+const tractors=[
+{name:"Fendt 200 V Vario",brand:"Fendt",power:"79–114 CP",price:"91.000 €",speed:"40 km/h",weight:"3,1 t",fuel:"68 l",trans:"CVT",img:"https://farmingsimulator.wiki.gg/wiki/Special:FilePath/Fendt_200_V_Vario_(FS25).png",desc:"Tractor compact premium, potrivit pentru lucrări agricole în spații înguste și ferme specializate. Transmisia Vario permite control lin al vitezei și manevre confortabile.",uses:["Lucrări în vie și plantații","Cultivare cu utilaje compacte","Transport de remorci mici"],pros:["Manevrabilitate bună","Transmisie CVT","Dimensiuni compacte"],cons:["Preț ridicat","Limitat pentru utilaje foarte grele"]},
+{name:"Landini REX 4 GT",brand:"Landini",power:"70–112 CP",price:"39.500 €",speed:"40 km/h",weight:"2,9 t",fuel:"—",trans:"Manuală",img:"https://farmingsimulator.wiki.gg/wiki/Special:FilePath/Landini_REX_4_GT_(FS25).png",desc:"Tractor compact specializat pentru livezi și plantații, cu profil potrivit lucrului între rânduri și manevre în spații restrânse.",uses:["Livezi și vii","Întreținerea plantațiilor","Transport ușor"],pros:["Profil compact","Potrivit pentru plantații","Manevrabil"],cons:["Putere limitată la lucrări grele","Utilizare specializată"]},
+{name:"New Holland TK4.80 Methane Power",brand:"New Holland",power:"75 CP",price:"57.500 €",speed:"12 km/h",weight:"3,6 t",fuel:"Metan",trans:"Manuală",img:"https://farmingsimulator.wiki.gg/wiki/Special:FilePath/New_Holland_TK4.80_Methane_Power_(FS25).png",desc:"Tractor pe șenile pentru terenuri în pantă și lucrări specializate. Propulsia pe metan îl diferențiază de tractoarele compacte convenționale.",uses:["Lucrări în pantă","Vii și plantații","Întreținerea fermei"],pros:["Tracțiune pe șenile","Stabilitate pe teren dificil","Motor pe metan"],cons:["Viteză redusă","Utilizare mai specializată"]}
 ];
-const catSelect=document.getElementById('catalogCategory'), catalogGrid=document.getElementById('catalogGrid'), catalogSearch=document.getElementById('catalogSearch');
-if(catSelect && catalogGrid){
- const categories=['Tractoare mici (FS25 – fără moduri)'];
- categories.forEach(c=>catSelect.add(new Option(c,c)));
- let selected=0;
- function renderCatalog(){
-  const q=(catalogSearch?.value||'').toLowerCase();
-  const rows=compactTractors.filter(x=>(x.name+" "+x.brand+" "+x.desc).toLowerCase().includes(q));
-  catalogGrid.innerHTML=`<div class="tractor-layout"><div class="tractor-list"><div class="tractor-cards">${rows.map((x,i)=>`<button class="tractor-card ${compactTractors.indexOf(x)===selected?'selected':''}" data-tractor="${compactTractors.indexOf(x)}"><img loading="lazy" src="${x.img}" alt="${x.name}" onerror="this.src='https://placehold.co/640x360/15221b/8bd44c?text='+encodeURIComponent('${x.name}')"><span><b>${x.name}</b><small>${x.power}</small></span></button>`).join('')}</div></div><div id="tractorDetail"></div><div class="comparison"><h2>⚖️ Comparație – Tractoare mici</h2><div class="table-scroll"><table><thead><tr><th>Tractor</th><th>Putere</th><th>Preț de bază</th><th>Viteză</th><th>Greutate</th><th>Combustibil</th><th>Transmisie</th></tr></thead><tbody>${rows.map(x=>`<tr><td>${x.name}</td><td>${x.power}</td><td>${x.price.toLocaleString('ro-RO')} €</td><td>${x.speed}</td><td>${x.weight}</td><td>${x.fuel}</td><td>${x.trans}</td></tr>`).join('')}</tbody></table></div></div></div>`;
-  showDetail(selected);
-  catalogGrid.querySelectorAll('[data-tractor]').forEach(b=>b.addEventListener('click',()=>{selected=+b.dataset.tractor;renderCatalog();}));
- }
- function showDetail(i){
-  const x=compactTractors[i];const d=document.getElementById('tractorDetail');if(!x||!d)return;
-  d.innerHTML=`<div class="detail-head"><h2>${x.name}</h2><span>${x.power}</span></div><div class="detail-grid"><div class="gallery"><img class="main-photo" src="${x.img}" alt="${x.name}" onerror="this.src='https://placehold.co/800x600/15221b/8bd44c?text='+encodeURIComponent('${x.name}')"><div class="thumbs"><img src="${x.img}" alt="Vedere tractor"></div></div><div class="spec"><h3>⚙️ Informații tehnice</h3>${[['Marcă',x.brand],['Model',x.model],['Putere',x.power],['Preț de bază',x.price.toLocaleString('ro-RO')+' €'],['Viteză maximă',x.speed],['Transmisie',x.trans],['Capacitate combustibil',x.fuel],['Greutate',x.weight],['Categorie',x.category],['An model real',x.year]].map(a=>`<p><b>${a[0]}:</b><span>${a[1]}</span></p>`).join('')}</div><div class="description"><h3>📄 Descriere detaliată</h3><p>${x.desc}</p><h3>🚜 Utilizări în FS25</h3><ul>${x.uses.map(a=>`<li>${a}</li>`).join('')}</ul></div><div class="pros"><h3>✅ Avantaje</h3><ul>${x.pros.map(a=>`<li>${a}</li>`).join('')}</ul></div><div class="cons"><h3>❌ Dezavantaje</h3><ul>${x.cons.map(a=>`<li>${a}</li>`).join('')}</ul></div></div><p class="data-note">Valorile afișate sunt orientative pentru catalog; verifică configurația selectată în magazinul jocului. „—” = informație neconfirmată.</p>`;
- }
- catalogSearch?.addEventListener('input',renderCatalog);catSelect.addEventListener('change',renderCatalog);renderCatalog();
-}
-document.querySelectorAll('.fs-cat-card').forEach(card=>card.addEventListener('click',()=>{
- const feedback=document.getElementById('fsCategoryFeedback');
- if(card.dataset.cat==='small'){
-  document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('active',x.dataset.page==='fs25'));document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id==='catalog'));window.scrollTo({top:0,behavior:'smooth'});
-  if(catalogSearch)catalogSearch.value='';
-  if(catSelect)catSelect.selectedIndex=0;
-  catalogSearch?.dispatchEvent(new Event('input'));
- }else{
-  feedback?.classList.remove('hidden');
-  if(feedback)feedback.innerHTML=`<div class="feedback-inner"><span>🚜</span><h3>${card.querySelector('b').textContent}</h3><p>Categoria este pregătită pentru extindere. Catalogul va afișa modelele FS25 originale aici.</p><button class="back-cat">Înapoi la categorii</button></div>`;
-  feedback?.querySelector('.back-cat')?.addEventListener('click',()=>feedback.classList.add('hidden'));
- }
-}));
-const nav=document.querySelector('.tabs');
-if(nav){nav.addEventListener('click',e=>{const b=e.target.closest('button[data-page]');if(!b)return;document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===b.dataset.page));window.scrollTo({top:0,behavior:'smooth'});});}
-document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>document.querySelector(`[data-page="${b.dataset.go}"]`)?.click()));
-if('serviceWorker' in navigator && location.protocol!=='file:')window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(console.warn));
-let installPrompt;const installBtn=document.getElementById('install');window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installPrompt=e;installBtn?.classList.remove('hidden')});installBtn?.addEventListener('click',async()=>{if(installPrompt){installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;installBtn.classList.add('hidden')}});
-
-// FS25 category interactions and animated detail panels
-document.querySelectorAll('.fs-cat-card').forEach(card=>{
- card.addEventListener('click',()=>{
-  const box=document.getElementById('fsCategoryFeedback');
-  if(!box)return;
-  box.classList.remove('hidden');
-  const title=card.querySelector('b')?.textContent||'Categorie';
-  box.innerHTML=`<div class="category-open"><div class="category-open-top"><span>🚜</span><div><small>FARMING SIMULATOR 25</small><h2>${title}</h2></div><button class="close-category" aria-label="Închide">✕</button></div><p>${card.dataset.cat==='small'?'Tractoare compacte pentru ferme mici, vii, livezi și lucrări în spații înguste.':card.dataset.cat==='medium'?'Tractoare versatile pentru lucrări zilnice și transport.':card.dataset.cat==='large'?'Tractoare puternice pentru lucrări grele și câmpuri mari.':'Tractoare articulate pentru tracțiune și putere ridicată.'}</p><div class="category-action-row"><span class="category-pill">FS25 · Fără moduri</span><button class="open-tractor-catalog">Deschide catalogul →</button></div></div>`;
-  box.querySelector('.close-category')?.addEventListener('click',()=>box.classList.add('hidden'));
-  box.querySelector('.open-tractor-catalog')?.addEventListener('click',()=>{
-    document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='catalog'));
-    window.scrollTo({top:0,behavior:'smooth'});
-  });
-  box.scrollIntoView({behavior:'smooth',block:'nearest'});
- });
-});
+const pages=[...document.querySelectorAll('.page')],nav=[...document.querySelectorAll('.nav button')];
+function page(id){pages.forEach(p=>p.classList.toggle('active',p.id===id));nav.forEach(b=>b.classList.toggle('active',b.dataset.page===id));window.scrollTo({top:0,behavior:'smooth'})}
+nav.forEach(b=>b.onclick=()=>page(b.dataset.page));document.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>page(b.dataset.open));
+const panel=document.querySelector('#categoryPanel');
+document.querySelectorAll('[data-category]').forEach(b=>b.onclick=()=>{const key=b.dataset.category;panel.classList.remove('hidden');panel.innerHTML=key==='small'?smallHTML():`<div class="panelbox reveal"><button class="close">✕ Închide</button><h2>${b.querySelector('b').textContent}</h2><p>Categoria este creată în interfață. Lista completă de modele și valorile verificate din joc se adaugă în această secțiune.</p><span class="tag">FS25 · joc de bază · fără moduri</span></div>`;panel.querySelector('.close')?.addEventListener('click',()=>panel.classList.add('hidden'));panel.scrollIntoView({behavior:'smooth',block:'start'});});
+function smallHTML(){return `<div class="panelbox reveal"><div class="panelhead"><div><small>FS25 · FĂRĂ MODURI</small><h2>🚜 Tractoare mici</h2></div><button class="close">✕ Închide</button></div><p>Apasă un model pentru fișa detaliată.</p><div class="tractor-cards">${tractors.map((t,i)=>`<button class="tractor" data-t="${i}"><img src="${t.img}" alt="${t.name}" onerror="this.src='icon.svg'"><b>${t.name}</b><small>${t.power}</small></button>`).join('')}</div><div id="tractorDetail"></div></div>`}
+panel.addEventListener('click',e=>{const b=e.target.closest('[data-t]');if(!b)return;const t=tractors[+b.dataset.t],d=panel.querySelector('#tractorDetail');d.innerHTML=`<div class="detail reveal"><div class="detailhero"><img src="${t.img}" alt="${t.name}" onerror="this.src='icon.svg'"><div><small>${t.brand}</small><h2>${t.name}</h2><span class="tag">${t.power}</span><p>${t.desc}</p></div></div><div class="detailcols"><div class="box"><h3>⚙️ Specificații</h3>${[['Marcă',t.brand],['Putere',t.power],['Preț',t.price],['Viteză',t.speed],['Greutate',t.weight],['Combustibil',t.fuel],['Transmisie',t.trans]].map(x=>`<p class="spec"><b>${x[0]}</b><span>${x[1]}</span></p>`).join('')}</div><div class="box"><h3>🟢 Utilizări</h3><ul>${t.uses.map(x=>`<li>${x}</li>`).join('')}</ul><h3>✅ Avantaje</h3><ul>${t.pros.map(x=>`<li>${x}</li>`).join('')}</ul><h3>❌ Dezavantaje</h3><ul>${t.cons.map(x=>`<li>${x}</li>`).join('')}</ul></div></div><p class="notice">Verifică valorile și configurațiile în magazinul jocului; unele date pot varia în funcție de echipare.</p></div>`;d.scrollIntoView({behavior:'smooth',block:'start'});});
+if('serviceWorker'in navigator && location.protocol!=='file:')window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));

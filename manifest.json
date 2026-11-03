@@ -1,1 +1,1 @@
-{"name": "Farming Simulator Guide", "short_name": "FS Guide", "start_url": "./index.html", "scope": "./", "display": "standalone", "orientation": "any", "background_color": "#101812", "theme_color": "#17251a", "icons": []}
+{"name":"Farming Simulator Guide","short_name":"FS Guide","start_url":"./","scope":"./","display":"standalone","background_color":"#080d10","theme_color":"#101811","orientation":"any","icons":[{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]}
