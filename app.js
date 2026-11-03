@@ -39,3 +39,20 @@ if(nav){nav.addEventListener('click',e=>{const b=e.target.closest('button[data-p
 document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>document.querySelector(`[data-page="${b.dataset.go}"]`)?.click()));
 if('serviceWorker' in navigator && location.protocol!=='file:')window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(console.warn));
 let installPrompt;const installBtn=document.getElementById('install');window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installPrompt=e;installBtn?.classList.remove('hidden')});installBtn?.addEventListener('click',async()=>{if(installPrompt){installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;installBtn.classList.add('hidden')}});
+
+// FS25 category interactions and animated detail panels
+document.querySelectorAll('.fs-cat-card').forEach(card=>{
+ card.addEventListener('click',()=>{
+  const box=document.getElementById('fsCategoryFeedback');
+  if(!box)return;
+  box.classList.remove('hidden');
+  const title=card.querySelector('b')?.textContent||'Categorie';
+  box.innerHTML=`<div class="category-open"><div class="category-open-top"><span>🚜</span><div><small>FARMING SIMULATOR 25</small><h2>${title}</h2></div><button class="close-category" aria-label="Închide">✕</button></div><p>${card.dataset.cat==='small'?'Tractoare compacte pentru ferme mici, vii, livezi și lucrări în spații înguste.':card.dataset.cat==='medium'?'Tractoare versatile pentru lucrări zilnice și transport.':card.dataset.cat==='large'?'Tractoare puternice pentru lucrări grele și câmpuri mari.':'Tractoare articulate pentru tracțiune și putere ridicată.'}</p><div class="category-action-row"><span class="category-pill">FS25 · Fără moduri</span><button class="open-tractor-catalog">Deschide catalogul →</button></div></div>`;
+  box.querySelector('.close-category')?.addEventListener('click',()=>box.classList.add('hidden'));
+  box.querySelector('.open-tractor-catalog')?.addEventListener('click',()=>{
+    document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='catalog'));
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+  box.scrollIntoView({behavior:'smooth',block:'nearest'});
+ });
+});
