@@ -43,3 +43,147 @@ body{background:radial-gradient(ellipse at 50% -15%,#17351b 0,#050b08 50%);backg
 body {
   padding-top: env(safe-area-inset-top);
 }
+
+/* ===== SETTINGS PRO ===== */
+
+.settings-backdrop {
+position:fixed;
+inset:0;
+z-index:100;
+background:#000b;
+backdrop-filter:blur(8px);
+display:flex;
+align-items:flex-end;
+justify-content:center;
+padding:12px;
+}
+
+.settings-backdrop[hidden] {
+display:none!important;
+}
+
+.settings-modal {
+width:min(100%,650px);
+max-height:88vh;
+overflow:auto;
+background:#0b160e;
+border:1px solid #456b34;
+border-radius:22px;
+padding:18px;
+box-shadow:0 20px 70px #000b;
+}
+
+.settings-head {
+display:flex;
+align-items:center;
+justify-content:space-between;
+border-bottom:1px solid #29472d;
+padding-bottom:12px;
+margin-bottom:12px;
+}
+
+.settings-head h2 {
+margin:4px 0;
+color:var(--lime);
+}
+
+.settings-head small {
+color:var(--muted);
+letter-spacing:2px;
+}
+
+.settings-head button {
+background:#17271a;
+border:1px solid #355b30;
+border-radius:10px;
+padding:9px 12px;
+color:var(--lime);
+}
+
+.setting-row {
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:14px;
+padding:13px 2px;
+border-bottom:1px solid #203624;
+}
+
+.setting-row strong {
+display:block;
+font-size:14px;
+}
+
+.setting-row small {
+display:block;
+color:var(--muted);
+font-size:12px;
+margin-top:4px;
+}
+
+.setting-row select,
+.setting-row input {
+background:#142319;
+color:#f2f7f1;
+border:1px solid #456b34;
+border-radius:9px;
+padding:9px;
+max-width:48%;
+}
+
+.setting-row button,
+.settings-action {
+background:#19351d;
+color:var(--lime);
+border:1px solid #456b34;
+border-radius:10px;
+padding:10px 12px;
+font-weight:700;
+}
+
+.settings-actions {
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:9px;
+padding-top:14px;
+}
+
+/* TEMA LUMINOS */
+
+body.light-mode {
+--bg:#eaf2e8;
+--panel:#fff;
+--line:#b7d0b6;
+--white:#152318;
+--muted:#526754;
+background:#eaf2e8;
+color:#152318;
+}
+
+body.light-mode .settings-modal {
+background:#f5fff3;
+color:#152318;
+}
+
+body.light-mode .setting-row select {
+color:#152318;
+background:#fff;
+}
+
+/* CONTRAST */
+
+body.high-contrast {
+--lime:#c4ff00;
+--green:#70ff00;
+--line:#7aff55;
+}
+
+/* ANIMATII OFF */
+
+body.no-animations *,
+body.no-animations *::before,
+body.no-animations *::after {
+animation:none!important;
+transition:none!important;
+scroll-behavior:auto!important;
+}
