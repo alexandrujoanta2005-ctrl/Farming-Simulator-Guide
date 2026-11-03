@@ -34,3 +34,16 @@ input,select{min-height:46px}
 .table-scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:650px;background:#10181c}th{background:#24651e;color:white}td,th{border:1px solid #435057;padding:8px;text-align:left}tr:nth-child(even){background:#172126}.data-note{font-size:.8rem;color:#aab5b0}
 @media(max-width:850px){.tractor-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.detail-grid{grid-template-columns:1fr 1fr}.gallery{grid-row:auto}.main-photo{height:220px}}
 @media(max-width:560px){.tractor-cards{grid-template-columns:1fr}.tractor-card img{height:190px}.detail-grid{grid-template-columns:1fr}.detail-head{align-items:flex-start;flex-direction:column}.main-photo{height:250px}#catalog{padding-left:12px;padding-right:12px}.spec p{font-size:.82rem}}
+
+/* polished FS25 category tiles + motion */
+.fs-category-wrap{margin:24px 0;padding:18px;background:linear-gradient(145deg,#101a15,#080e11);border:1px solid #31443a;border-radius:16px;box-shadow:0 12px 35px #0005}
+.fs-category-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.fs-cat-card{position:relative;display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:9px;min-height:145px;padding:17px;background:linear-gradient(150deg,#1b2a20,#10171b);border:1px solid #3b5141;border-radius:13px;color:#f7fff7;cursor:pointer;overflow:hidden;transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+.fs-cat-card:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 90% 10%,#70d52b22,transparent 55%);pointer-events:none}
+.fs-cat-card:hover,.fs-cat-card:focus-visible{transform:translateY(-5px);border-color:#9be52c;box-shadow:0 9px 25px #70d52b22;outline:none}
+.cat-emoji{font-size:27px;color:#9be52c}.fs-cat-card b{font-size:1rem}.fs-cat-card small{color:#b4c2b8}.cat-arrow{position:absolute;right:15px;bottom:13px;color:#a2ed20;font-size:22px}
+.category-feedback{margin-top:12px;animation:fadeSlide .35s ease}.feedback-inner{padding:18px;border-radius:12px;background:#132019;border:1px solid #7fbd36}.feedback-inner h3{margin:8px 0}.feedback-inner button{background:#285e20;color:white;border:0;border-radius:8px;padding:10px 15px}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.machine-card,.tractor-card,.detail-grid,.comparison{animation:fadeSlide .35s ease}
+@media(max-width:850px){.fs-category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:480px){.fs-category-wrap{padding:12px}.fs-category-grid{gap:8px}.fs-cat-card{min-height:125px;padding:12px}.fs-cat-card b{font-size:.92rem}}

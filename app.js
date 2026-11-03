@@ -21,6 +21,19 @@ if(catSelect && catalogGrid){
  }
  catalogSearch?.addEventListener('input',renderCatalog);catSelect.addEventListener('change',renderCatalog);renderCatalog();
 }
+document.querySelectorAll('.fs-cat-card').forEach(card=>card.addEventListener('click',()=>{
+ const feedback=document.getElementById('fsCategoryFeedback');
+ if(card.dataset.cat==='small'){
+  document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('active',x.dataset.page==='fs25'));document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id==='catalog'));window.scrollTo({top:0,behavior:'smooth'});
+  if(catalogSearch)catalogSearch.value='';
+  if(catSelect)catSelect.selectedIndex=0;
+  catalogSearch?.dispatchEvent(new Event('input'));
+ }else{
+  feedback?.classList.remove('hidden');
+  if(feedback)feedback.innerHTML=`<div class="feedback-inner"><span>🚜</span><h3>${card.querySelector('b').textContent}</h3><p>Categoria este pregătită pentru extindere. Catalogul va afișa modelele FS25 originale aici.</p><button class="back-cat">Înapoi la categorii</button></div>`;
+  feedback?.querySelector('.back-cat')?.addEventListener('click',()=>feedback.classList.add('hidden'));
+ }
+}));
 const nav=document.querySelector('.tabs');
 if(nav){nav.addEventListener('click',e=>{const b=e.target.closest('button[data-page]');if(!b)return;document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===b.dataset.page));window.scrollTo({top:0,behavior:'smooth'});});}
 document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>document.querySelector(`[data-page="${b.dataset.go}"]`)?.click()));
