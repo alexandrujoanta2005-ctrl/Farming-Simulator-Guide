@@ -5,6 +5,7 @@ const games = [25, 22, 19, 17, 15, 13, 11, 2009];
 const gameBox = document.querySelector("#games");
 
 function renderGames() {
+  if (!gameBox) return;
   gameBox.innerHTML = "";
 
   games.forEach((g, i) => {
@@ -439,8 +440,13 @@ function openSettings() {
     if (!el) return;
 
     if (el.type === "checkbox") {
-      const key = id.replace("pref", "").toLowerCase();
-      el.checked = !!p[key];
+      const keys = {
+        prefContrast: "contrast",
+        prefAnimations: "animations",
+        prefVibration: "vibration",
+        prefLargeText: "largeText"
+      };
+      el.checked = !!p[keys[id]];
     } else {
       el.value = p[id] ?? (id === "favoriteGame" ? "25" : "PC");
     }
@@ -470,7 +476,7 @@ function openSettings() {
     savePrefs(next);
     renderApp();
     openSettings();
-    alert("Setările au fost salvate!");
+    alert(tr("allowed") || "Setările au fost salvate!");
   };
 
   document.getElementById("enableNotifications").onclick = async () => {
