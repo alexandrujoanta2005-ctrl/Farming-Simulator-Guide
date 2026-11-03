@@ -187,3 +187,105 @@ animation:none!important;
 transition:none!important;
 scroll-behavior:auto!important;
 }
+
+/* ===== GUIDE PRO TRANSLATIONS + SETTINGS UPDATE ===== */
+
+.settings-modal {
+  overscroll-behavior: contain;
+}
+
+.settings-modal select,
+.settings-modal input,
+.settings-modal button {
+  cursor: pointer;
+}
+
+.settings-modal select:focus,
+.settings-modal button:focus {
+  outline: 2px solid var(--lime);
+  outline-offset: 2px;
+}
+
+.setting-row input[type="checkbox"] {
+  accent-color: var(--lime);
+  width: 22px;
+  height: 22px;
+}
+
+.settings-actions button {
+  min-height: 44px;
+}
+
+body.light-mode .quick button {
+  background: #f7fff5;
+  color: #203923;
+  border-color: #b7d0b6;
+}
+
+body.light-mode .game,
+body.light-mode .category,
+body.light-mode .popular article,
+body.light-mode .news {
+  color: #f2f7f1;
+}
+
+body.light-mode .bottom {
+  background: #f4fff0ed;
+  border-color: #b7d0b6;
+}
+
+body.light-mode .bottom button {
+  color: #29452e;
+}
+
+body.light-mode .bottom .active {
+  color: #fff;
+}
+
+body.light-mode .itemlist article {
+  background: #fff;
+  color: #152318;
+  border-color: #b7d0b6;
+}
+
+body.light-mode #page p {
+  color: #526754 !important;
+}
+
+/* Text accessibility */
+body.large-text {
+  font-size: 18px;
+}
+
+body.large-text .section-head h2 {
+  font-size: 23px;
+}
+
+body.large-text .quick button {
+  font-size: 16px;
+}
+
+/* Settings modal mobile */
+@media(max-width:480px) {
+  .settings-backdrop {
+    padding: 8px;
+  }
+
+  .settings-modal {
+    max-height: 92vh;
+    padding: 15px;
+    border-radius: 19px;
+  }
+
+  .setting-row {
+    gap: 8px;
+  }
+
+  .setting-row strong {
+    font-size: 13px;
+  }
+
+  .setting-row small {
+    font-size: 11px;
+  }
+}
