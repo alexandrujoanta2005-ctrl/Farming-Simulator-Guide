@@ -1,11 +1,27 @@
 
+// FIX: dezactiveaza cache-ul vechi PWA pentru ca Live Server si telefonul sa incarce mereu fisierele actuale.
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", async () => {
+    try {
+      const registrations = await navigator.serviceWorker.getRegistrations();
+      await Promise.all(registrations.map(reg => reg.unregister()));
+      if ("caches" in window) {
+        const cacheNames = await caches.keys();
+        await Promise.all(cacheNames.map(name => caches.delete(name)));
+      }
+    } catch (err) {
+      console.warn("Curatarea cache-ului PWA nu a reusit:", err);
+    }
+  });
+}
+
+
 // Farming Simulator GUIDE PRO - app.js
 
 const games = [25, 22, 19, 17, 15, 13, 11, 2009];
 const gameBox = document.querySelector("#games");
 
 function renderGames() {
-  if (!gameBox) return;
   gameBox.innerHTML = "";
 
   games.forEach((g, i) => {
@@ -440,13 +456,8 @@ function openSettings() {
     if (!el) return;
 
     if (el.type === "checkbox") {
-      const keys = {
-        prefContrast: "contrast",
-        prefAnimations: "animations",
-        prefVibration: "vibration",
-        prefLargeText: "largeText"
-      };
-      el.checked = !!p[keys[id]];
+      const key = id.replace("pref", "").toLowerCase();
+      el.checked = !!p[key];
     } else {
       el.value = p[id] ?? (id === "favoriteGame" ? "25" : "PC");
     }
@@ -476,7 +487,7 @@ function openSettings() {
     savePrefs(next);
     renderApp();
     openSettings();
-    alert(tr("allowed") || "Setările au fost salvate!");
+    alert("Setările au fost salvate!");
   };
 
   document.getElementById("enableNotifications").onclick = async () => {
@@ -590,8 +601,3 @@ applyPrefs();
 renderGames();
 renderApp();
 
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js");
-  });
-}
