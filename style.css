@@ -10,3 +10,27 @@ button,input,select,a{touch-action:manipulation}
 input,select{min-height:46px}
 .machine-card img{height:190px;object-fit:contain}
 @media(max-width:520px){.page{padding:14px}.cards,.tiles,.stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.machine-card img{height:160px}.machine-info{padding:12px}.machine-info h3{font-size:16px}}
+
+/* FS25 compact tractor catalog inspired by the supplied reference */
+#catalog.page{background:#080d10;color:#f3f5f4}
+#catalog h1{font-weight:800;letter-spacing:-.5px}
+#catalogSearch,#catalogCategory{background:#11191d;color:#fff;border:1px solid #38464b;border-radius:10px;padding:12px;margin:8px 5px 14px 0;max-width:100%}
+.tractor-layout{display:grid;gap:16px}
+.tractor-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.tractor-card{padding:0;text-align:left;background:#10181c;border:1px solid #435057;border-radius:12px;overflow:hidden;color:#fff;cursor:pointer;min-width:0}
+.tractor-card.selected{border:2px solid #a2ed20;box-shadow:0 0 10px #8bd44c55}
+.tractor-card img{width:100%;height:150px;object-fit:cover;display:block;background:#18231c}
+.tractor-card span{display:block;padding:10px}.tractor-card b{display:block}.tractor-card small{color:#c8d2cc}
+.detail-head{background:linear-gradient(90deg,#101a15,#07100c);border-top:2px solid #8bd44c;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.detail-head h2{margin:0}.detail-head span{color:#a2ed20;font-weight:700}
+.detail-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:12px;margin-top:12px}
+.gallery,.spec,.description,.pros,.cons{background:#10181c;border:1px solid #3a484b;border-radius:10px;overflow:hidden;padding:12px}
+.gallery{grid-row:span 2}.main-photo{width:100%;height:300px;object-fit:cover;border-radius:8px}.thumbs img{width:70px;height:50px;object-fit:cover;margin:6px 4px 0 0;border-radius:5px}
+.spec h3,.description h3,.pros h3,.cons h3{margin:0 0 10px;color:#fff;font-size:1rem}
+.spec p{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid #344044;padding:6px 0;margin:0;font-size:.88rem}.spec p span{text-align:right}
+.description p,.description li,.pros li,.cons li{font-size:.9rem;line-height:1.5}
+.pros{border-color:#4b812e}.pros h3{color:#a2ed20}.cons{border-color:#873a31}.cons h3{color:#ff675c}
+.comparison{margin-top:14px}.comparison h2{border-bottom:2px solid #a2ed20;padding:10px}
+.table-scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:650px;background:#10181c}th{background:#24651e;color:white}td,th{border:1px solid #435057;padding:8px;text-align:left}tr:nth-child(even){background:#172126}.data-note{font-size:.8rem;color:#aab5b0}
+@media(max-width:850px){.tractor-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.detail-grid{grid-template-columns:1fr 1fr}.gallery{grid-row:auto}.main-photo{height:220px}}
+@media(max-width:560px){.tractor-cards{grid-template-columns:1fr}.tractor-card img{height:190px}.detail-grid{grid-template-columns:1fr}.detail-head{align-items:flex-start;flex-direction:column}.main-photo{height:250px}#catalog{padding-left:12px;padding-right:12px}.spec p{font-size:.82rem}}
